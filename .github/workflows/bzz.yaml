@@ -11,7 +11,10 @@ jobs:
             - name: Create sample data
               run: mkdir -p dist && echo "Hello, World!" > dist/index.txt
             - uses: ethersphere/swarm-actions/upload-dir@v1
+              id: upload
               with:
                   bee-url: https://api.gateway.ethswarm.org
                   postage-batch-id: '0000000000000000000000000000000000000000000000000000000000000000'
                   dir: ./dist
+            - name: Print reference
+              run: echo '${{ steps.upload.outputs.reference }}'
