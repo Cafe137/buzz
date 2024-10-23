@@ -1,0 +1,17 @@
+# After new release is published on github, publish it to npmjs
+name: BZZ
+
+on:
+    workflow_dispatch:
+
+jobs:
+    publish:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Create sample data
+              run: mkdir -p dist && echo "Hello, World!" > dist/index.txt
+            - uses: ethersphere/swarm-actions/upload-dir@v1
+              with:
+                  bee-url: https://api.gateway.ethswarm.org
+                  postage-batch-id: '0000000000000000000000000000000000000000000000000000000000000000'
+                  dir: ./dist
